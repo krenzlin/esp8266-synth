@@ -8,21 +8,8 @@ void HAL::I2S::init(int sr) {
     i2s_set_rate(sr);
 }
 
-void HAL::I2S::pdm_write(uint16_t signal) {
-    static uint32_t i2sACC;
-    static uint16_t err;
-
-    for (uint8_t i = 0; i<32; i++) {
-      i2sACC = i2sACC << 1;
-      if (signal >= err) {
-        i2sACC |= 1;
-        err += 0xFFFF - signal;
-      } else {
-        err -= signal;
-      }
-    }
-
-    i2s_write_sample(i2sACC);
+void HAL::I2S::write(uint32_t sample) {
+    i2s_write_sample(sample);
 }
 
 void HAL::WIFI::turn_off() {

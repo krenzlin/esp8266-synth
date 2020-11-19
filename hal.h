@@ -4,7 +4,7 @@
 namespace HAL {
     namespace I2S {
         void init(int sr=44100);
-        void pdm_write(uint16_t signal);
+        void write(uint32_t sample);
     }
 
     namespace WIFI {
