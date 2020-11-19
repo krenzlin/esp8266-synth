@@ -19,3 +19,6 @@ flash: build
 
 help:
 	$(ESPMAKE) help
+
+test:
+	g++ tests/*.cpp osc.cpp -I . -o test && test -s
