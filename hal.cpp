@@ -18,3 +18,7 @@ void HAL::WIFI::turn_off() {
     WiFi.forceSleepBegin();
     delay(1); // 1ms; maybe use yield() instead
 }
+
+void HAL::set_cpu_freq(uint8_t freq) {
+    system_update_cpu_freq(freq);
+}

@@ -10,4 +10,6 @@ namespace HAL {
     namespace WIFI {
         void turn_off();
     }
+
+    void set_cpu_freq(uint8_t freq);
 }
