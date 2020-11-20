@@ -12,6 +12,10 @@ void HAL::I2S::write(uint32_t sample) {
     i2s_write_sample(sample);
 }
 
+void HAL::I2S::write(uint16_t left, uint16_t right) {
+    i2s_write_sample(left << 16 | right);
+}
+
 void HAL::WIFI::turn_off() {
     WiFi.disconnect();
     WiFi.mode(WIFI_OFF);

@@ -12,5 +12,6 @@ void setup() {
 }
 
 void loop() {
-    HAL::I2S::write(synth.sample());
+    auto sample = synth.sample();
+    HAL::I2S::write(sample, sample);
 }
