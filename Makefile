@@ -11,10 +11,15 @@ BOARD = d1_mini
 ESPMAKE = make -f $(MAKE_ESP_ARDUINO) SKETCH=$(SKETCH) CUSTOM_LIBS=$(LIBS) BUILD_DIR=$(BUILD_DIR) UPLOAD_SPEED=$(UPLOAD_SPEED) CHIP=$(CHIP) BOARD=$(BOARD) EXCLUDE_DIRS=./tests
 
 build:
+	# temporarily renaming as workaround for weird missing SPI.h bug when catch is present
+	mv tests/catch.hpp tests/catch.hpp.backup
 	$(ESPMAKE)
+	mv tests/catch.hpp.backup tests/catch.hpp
 
 flash: build
+	mv tests/catch.hpp tests/catch.hpp.backup
 	$(ESPMAKE) flash
+	mv tests/catch.hpp.backup tests/catch.hpp
 
 help:
 	$(ESPMAKE) help
