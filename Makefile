@@ -13,12 +13,12 @@ ESPMAKE = make -f $(MAKE_ESP_ARDUINO) SKETCH=$(SKETCH) CUSTOM_LIBS=$(LIBS) BUILD
 build:
 	# temporarily renaming as workaround for weird missing SPI.h bug when catch is present
 	mv tests/catch.hpp tests/catch.hpp.backup
-	$(ESPMAKE)
+	-$(ESPMAKE)
 	mv tests/catch.hpp.backup tests/catch.hpp
 
 flash: build
 	mv tests/catch.hpp tests/catch.hpp.backup
-	$(ESPMAKE) flash
+	-$(ESPMAKE) flash
 	mv tests/catch.hpp.backup tests/catch.hpp
 
 help:
