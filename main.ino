@@ -5,6 +5,7 @@
 
 auto synth1 = OSC::Saw();
 auto synth2 = OSC::Saw();
+auto drum = OSC::Sampler();
 
 void setup() {
     HAL::set_cpu_freq(160);
@@ -16,6 +17,7 @@ void setup() {
 }
 
 void loop() {
-    auto sample = (synth1.sample() + synth2.sample()) >> 6;
+    auto sample = (synth1.sample() + synth2.sample()) >> 8;
+    sample += drum.sample() >> 6;
     HAL::I2S::write(sample, sample);
 }
