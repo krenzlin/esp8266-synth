@@ -26,3 +26,6 @@ help:
 
 test:
 	g++ tests/*.cpp src/osc.cpp -I include/ -o bin/test && bin/test -s
+
+write:
+	g++ write_to_file.cpp src/osc.cpp -I include/ -o bin/write && bin/write
