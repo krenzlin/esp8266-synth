@@ -7,7 +7,7 @@ uint16_t OSC::Saw::set_note(int note) {
 }
 
 uint16_t OSC::Saw::sample() {
-    auto sample = phase;
+    uint16_t sample = phase;
 
     phase += p_incr;
     if (phase > 0xFFFF) {
@@ -17,12 +17,16 @@ uint16_t OSC::Saw::sample() {
     return sample;
 }
 
-uint16_t OSC::Sampler::sample() {
-    auto sample = BD16[phase];
+void OSC::Sampler::on() {
+    phase = 0;
+}
 
-    phase++;
-    if (phase >= BD16LEN) {
-        phase = 0;
+uint16_t OSC::Sampler::sample() {
+    uint16_t sample {0};
+
+    if (phase < BD16LEN) {
+        sample = BD16[phase];
+        phase++;
     }
 
     return sample;

@@ -17,5 +17,6 @@ namespace OSC {
 
         public:
             uint16_t sample();
+            void on();
     };
 }
