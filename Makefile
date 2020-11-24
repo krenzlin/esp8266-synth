@@ -26,3 +26,6 @@ help:
 
 test:
 	g++ tests/*.cpp src/osc.cpp -I include/ -o bin/test && bin/test -s
+
+test_clock:
+	g++ -g tests/test_main.cpp tests/test_clock.cpp src/clock.cpp -I include/ -o bin/test && bin/test
