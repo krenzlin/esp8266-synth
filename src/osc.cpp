@@ -2,7 +2,7 @@
 #include "luts.h"
 #include "samples.h"
 
-uint16_t osc::Saw::set_note(int note) {
+uint16_t osc::Saw::on(uint16_t note) {
     p_incr = lut::mtoincr[note];
 }
 
@@ -17,16 +17,16 @@ uint16_t osc::Saw::sample() {
     return sample;
 }
 
-void osc::Sampler::on() {
-    phase = 0;
+void osc::Sampler::on(uint16_t note) {
+    index = 0;
 }
 
 uint16_t osc::Sampler::sample() {
     uint16_t sample {0};
 
-    if (phase < BD16LEN) {
-        sample = samples::BD16[phase];
-        phase++;
+    if (index < samples::BD16LEN) {
+        sample = samples::BD16[index];
+        index++;
     }
 
     return sample;

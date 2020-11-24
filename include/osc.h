@@ -9,14 +9,14 @@ namespace osc {
 
         public:
             uint16_t sample();
-            uint16_t set_note(int note);
+            uint16_t on(uint16_t note);
     };
 
     class Sampler {
-        uint16_t phase {0};
+        uint32_t index {0};
 
         public:
             uint16_t sample();
-            void on();
+            void on(uint16_t note);
     };
 }

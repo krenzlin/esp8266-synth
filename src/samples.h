@@ -3,17 +3,17 @@
 
 namespace samples {
 
-#define BD16LEN 3796UL
-#define CP16LEN 4445UL
-#define CR16LEN 48686UL
-#define HH16LEN 1734UL
-#define HT16LEN 5802UL
-#define LT16LEN 7061UL
-#define MT16LEN 7304UL
-#define OH16LEN 4772UL
-#define RD16LEN 52850UL
-#define RS16LEN 1316UL
-#define SD16LEN 5577UL
+const uint32_t BD16LEN = 3796UL;
+const uint32_t CP16LEN = 4445UL;
+const uint32_t CR16LEN = 48686UL;
+const uint32_t HH16LEN = 1734UL;
+const uint32_t HT16LEN = 5802UL;
+const uint32_t LT16LEN = 7061UL;
+const uint32_t MT16LEN = 7304UL;
+const uint32_t OH16LEN = 4772UL;
+const uint32_t RD16LEN = 52850UL;
+const uint32_t RS16LEN = 1316UL;
+const uint32_t SD16LEN = 5577UL;
 
 const uint16_t BD16[BD16LEN] = {
  40,  85, 137, 144, -30, -347, -609, -785, // 0-7
