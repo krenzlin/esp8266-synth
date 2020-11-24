@@ -2,7 +2,7 @@
 #include "luts.h"
 #include "samples.h"
 
-uint16_t osc::Saw::on(uint16_t note) {
+void osc::Saw::on(uint16_t note) {
     p_incr = lut::mtoincr[note];
 }
 

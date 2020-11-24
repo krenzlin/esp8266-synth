@@ -9,7 +9,7 @@ namespace osc {
 
         public:
             uint16_t sample();
-            uint16_t on(uint16_t note);
+            void on(uint16_t note);
     };
 
     class Sampler {
