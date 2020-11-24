@@ -15,6 +15,7 @@ class Clock {
 
         void set_bpm(uint16_t bpm);
         void start();
+        void start(uint16_t bpm);
         void stop();
         void tick();
 };

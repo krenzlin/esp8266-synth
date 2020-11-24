@@ -12,6 +12,12 @@ void Clock::start() {
     running = true;
 }
 
+void Clock::start(uint16_t bpm) {
+    set_bpm(bpm);
+    ticks = 0;
+    running = true;
+}
+
 void Clock::stop() {
     running = false;
 }

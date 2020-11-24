@@ -45,7 +45,22 @@ TEST_CASE("Clock basics") {
         clock.start();
         REQUIRE(clock.ticks == 0);
     }
+
+    SECTION("set bpm") {
+        auto clock = Clock(44100, 24);
+        REQUIRE(clock.ticks_per_pulse == 0);
+        clock.set_bpm(120);
+        REQUIRE(clock.ticks_per_pulse == 918);
+    }
+
+    SECTION("set bpm at start") {
+        auto clock = Clock(44100, 24);
+        REQUIRE(clock.ticks_per_pulse == 0);
+        clock.start(120);
+        REQUIRE(clock.ticks_per_pulse == 918);
+    }
 }
+
 
 TEST_CASE("Clock pulse cycle") {
 
@@ -76,11 +91,5 @@ TEST_CASE("Clock pulse cycle") {
         clock.tick();
         REQUIRE(clock.ticks == 0);
 
-    }
-
-    SECTION("set bpm -> ticks per pulse") {
-        auto clock = Clock(44100, 24);
-        clock.set_bpm(120);
-        REQUIRE(clock.ticks_per_pulse == 918);
     }
 }
