@@ -22,7 +22,7 @@ void osc::Sampler::on(uint16_t note) {
 }
 
 uint16_t osc::Sampler::sample() {
-    uint16_t sample {0};
+    uint16_t sample {0x7FFF};
 
     if (index < samples::BD16LEN) {
         sample = samples::BD16[index];

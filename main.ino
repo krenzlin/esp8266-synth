@@ -14,7 +14,6 @@ void setup() {
     hal::wifi::turn_off();
     hal::i2s::init(44100);
 
-    synth.on(35);
     auto cb = [&]() mutable {drum.on(0);};
     clk.set_pulse_callback(cb);
     clk.start(bpm);
