@@ -2,9 +2,10 @@
 #include "clock.h"
 #include "osc.h"
 #include "misc.h"
+#include "samples.h"
 
 auto synth = osc::Saw();
-auto drum = osc::Sampler();
+auto drum = osc::Sampler(samples::CP16, samples::CP16LEN);
 auto clk = Clock(44100, 1);
 uint16_t bpm {120};
 
