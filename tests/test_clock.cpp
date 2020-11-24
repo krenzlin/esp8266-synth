@@ -111,11 +111,13 @@ TEST_CASE("Clock callback", "[Clock]") {
 
     SECTION("call function") {
         auto mock = Mock();
-        auto cb = std::bind(&Mock::call, std::ref(mock));
+        auto cb = [&]() mutable {mock.call();};
         clock.set_pulse_callback(cb);
+
         clock.tick();
         REQUIRE(clock.ticks == 1);
         REQUIRE(mock.called == false);
+
         clock.tick();
         REQUIRE(clock.ticks == 0);
         REQUIRE(mock.called == true);
