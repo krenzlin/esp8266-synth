@@ -1,7 +1,7 @@
 #pragma once
 #include <stdint.h>
 
-namespace OSC {
+namespace osc {
 
     class Saw {
         uint16_t phase {0};

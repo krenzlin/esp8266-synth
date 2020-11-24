@@ -1,14 +1,14 @@
 #pragma once
 #include <stdint.h>
 
-namespace HAL {
-    namespace I2S {
+namespace hal {
+    namespace i2s {
         void init(int sr=44100);
         void write(uint32_t sample);
         void write(uint16_t left, uint16_t right);
     }
 
-    namespace WIFI {
+    namespace wifi {
         void turn_off();
     }
 

@@ -7,7 +7,7 @@ Convert PCM sample into PCM with 32x oversampling
 
 c.f. https://en.wikipedia.org/wiki/Pulse-density_modulation#Algorithm
 */
-uint32_t MISC::pcm_to_pdm(uint16_t sample) {
+uint32_t misc::pcm_to_pdm(uint16_t sample) {
     static uint16_t qe {MAX_16BIT >> 1};
     uint32_t pdm {0};
 

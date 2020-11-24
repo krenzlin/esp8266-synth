@@ -1,6 +1,8 @@
 #pragma once
 #include <stdint.h>
 
+namespace samples {
+
 #define BD16LEN 3796UL
 #define CP16LEN 4445UL
 #define CR16LEN 48686UL
@@ -17957,3 +17959,5 @@ const uint16_t SD16[SD16LEN] = {
 -762, -37, 728, 328, -401, -945, -624, 627, // 5560-5567
 1938, 1668, -161, -1516, -1356, -433, -569, -561, // 5568-5575
 -87}; // 5576-5576
+
+} // samples
