@@ -20,6 +20,7 @@ uint16_t osc::Saw::sample() {
 osc::Sampler::Sampler(const uint16_t sample[], uint32_t len) {
     sample_ = sample;
     len_ = len;
+    index = len_;
 }
 
 void osc::Sampler::on(uint16_t note) {
