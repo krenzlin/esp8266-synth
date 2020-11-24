@@ -2,10 +2,9 @@
 #include "clock.h"
 #include "osc.h"
 #include "misc.h"
-#include "samples.h"
+#include "drums.h"
 
-auto synth = osc::Saw();
-auto drum = osc::Sampler(samples::CP16, samples::CP16LEN);
+auto drums = Drums();
 auto clk = Clock(44100, 1);
 uint16_t bpm {120};
 
@@ -15,25 +14,14 @@ void setup() {
     hal::wifi::turn_off();
     hal::i2s::init(44100);
 
-    auto cb = [&]() mutable {drum.on(0);};
+    auto cb = [&]() mutable {drums.on(35); drums.on(44);};
     clk.set_pulse_callback(cb);
     clk.start(bpm);
 }
 
 
 void loop() {
-    static uint32_t ticks {0};
-    ticks++;
-    if (ticks > 44100) {
-        bpm += 5;
-        if (bpm > 200) {
-            bpm = 60;
-        }
-        clk.set_bpm(bpm);
-        ticks = 0;
-    }
     clk.tick();
-    uint16_t sample = drum.sample() >> 6;
-    sample += synth.sample() >> 6;
+    uint16_t sample = drums.sample() >> 4;
     hal::i2s::write(sample, sample);
 }
