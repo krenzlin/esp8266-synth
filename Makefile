@@ -25,7 +25,4 @@ help:
 	$(ESPMAKE) help
 
 test:
-	g++ tests/*.cpp src/osc.cpp -I include/ -o bin/test && bin/test -s
-
-test_clock:
-	g++ -g tests/test_main.cpp tests/test_clock.cpp src/clock.cpp -I include/ -o bin/test && bin/test
+	g++ tests/*.cpp src/osc.cpp src/clock.cpp -I include/ -o bin/test && bin/test -s
