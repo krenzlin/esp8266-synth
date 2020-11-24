@@ -30,6 +30,13 @@ void Clock::tick() {
     ticks += 1;
 
     if (ticks >= ticks_per_pulse) {
+        if (pulse_cb != nullptr) {
+            pulse_cb();
+        }
         ticks = 0;
     }
+}
+
+void Clock::set_pulse_callback(cb_t cb) {
+    pulse_cb = cb;
 }

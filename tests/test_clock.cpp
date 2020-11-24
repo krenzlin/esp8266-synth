@@ -1,7 +1,8 @@
 #include "catch.hpp"
 #include "clock.h"
 
-TEST_CASE("Clock basics") {
+
+TEST_CASE("Clock basics", "[Clock]") {
     auto clock = Clock();
     clock.set_bpm(100);
 
@@ -62,7 +63,7 @@ TEST_CASE("Clock basics") {
 }
 
 
-TEST_CASE("Clock pulse cycle") {
+TEST_CASE("Clock pulse cycle", "[Clock]") {
 
     SECTION("cycle @ 60bpm") {
         auto clock = Clock(2, 1); // sr, ppq
@@ -91,5 +92,32 @@ TEST_CASE("Clock pulse cycle") {
         clock.tick();
         REQUIRE(clock.ticks == 0);
 
+    }
+}
+
+class Mock {
+    public:
+        bool called {false};
+        void call() {
+            called = true;
+        }
+};
+
+
+TEST_CASE("Clock callback", "[Clock]") {
+    auto clock = Clock(2, 1);
+    clock.start(60);
+    REQUIRE(clock.ticks_per_pulse == 2);
+
+    SECTION("call function") {
+        auto mock = Mock();
+        auto cb = std::bind(&Mock::call, std::ref(mock));
+        clock.set_pulse_callback(cb);
+        clock.tick();
+        REQUIRE(clock.ticks == 1);
+        REQUIRE(mock.called == false);
+        clock.tick();
+        REQUIRE(clock.ticks == 0);
+        REQUIRE(mock.called == true);
     }
 }
