@@ -19,7 +19,7 @@ namespace osc {
         uint32_t index {0};
 
         public:
-            Sampler(uint16_t sample[], const uint32_t len) : sample_{sample}, len_{len}, index{len} {};
+            Sampler(const uint16_t sample[], const uint32_t len) : sample_{sample}, len_{len}, index{len} {};
             uint16_t sample();
             void on(const uint32_t note);
     };
