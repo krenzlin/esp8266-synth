@@ -1,9 +1,9 @@
 #include "clock.h"
 
-Clock::Clock(uint32_t sr, uint32_t ppq) : sr{sr}, ppq{ppq} {
+Clock::Clock(const uint32_t sr, const uint32_t ppq) : sr{sr}, ppq{ppq} {
 };
 
-void Clock::set_bpm(uint32_t bpm) {
+void Clock::set_bpm(const uint32_t bpm) {
     ticks_per_pulse = sr / (ppq * bpm / 60.f);
 }
 
@@ -12,7 +12,7 @@ void Clock::start() {
     running = true;
 }
 
-void Clock::start(uint32_t bpm) {
+void Clock::start(const uint32_t bpm) {
     set_bpm(bpm);
     ticks = 0;
     running = true;
@@ -37,6 +37,6 @@ void Clock::tick() {
     }
 }
 
-void Clock::set_pulse_callback(cb_t cb) {
+void Clock::set_pulse_callback(const cb_t cb) {
     pulse_cb = cb;
 }

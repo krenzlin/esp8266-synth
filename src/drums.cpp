@@ -1,7 +1,7 @@
 #include "drums.h"
 #include "osc.h"
 
-void Drums::on(uint32_t note) {
+void Drums::on(const uint32_t note) {
     if (note == 35) {
         bd.on(0);
     } else if (note == 38) {

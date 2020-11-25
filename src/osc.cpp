@@ -2,7 +2,7 @@
 #include "luts.h"
 #include "samples.h"
 
-void osc::Saw::on(uint32_t note) {
+void osc::Saw::on(const uint32_t note) {
     p_incr = lut::mtoincr[note];
 }
 
@@ -17,13 +17,13 @@ uint16_t osc::Saw::sample() {
     return sample;
 }
 
-osc::Sampler::Sampler(const uint16_t sample[], uint32_t len) {
+osc::Sampler::Sampler(const uint16_t sample[], const uint32_t len) {
     sample_ = sample;
     len_ = len;
     index = len_;
 }
 
-void osc::Sampler::on(uint32_t note) {
+void osc::Sampler::on(const uint32_t note) {
     index = 0;
 }
 

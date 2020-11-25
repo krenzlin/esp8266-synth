@@ -9,6 +9,6 @@ class Drums {
     osc::Sampler hh {osc::Sampler(samples::HH16, samples::HH16LEN)};
 
     public:
-        void on(uint32_t note);
+        void on(const uint32_t note);
         uint16_t sample();
 };

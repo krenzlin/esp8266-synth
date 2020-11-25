@@ -9,7 +9,7 @@ namespace osc {
 
         public:
             uint16_t sample();
-            void on(uint32_t note);
+            void on(const uint32_t note);
     };
 
     class Sampler {
@@ -18,8 +18,8 @@ namespace osc {
         const uint16_t *sample_;
 
         public:
-            Sampler(const uint16_t sample[], uint32_t len);
+            Sampler(const uint16_t sample[], const uint32_t len);
             uint16_t sample();
-            void on(uint32_t note);
+            void on(const uint32_t note);
     };
 }
