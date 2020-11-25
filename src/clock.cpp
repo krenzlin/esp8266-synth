@@ -1,8 +1,5 @@
 #include "clock.h"
 
-Clock::Clock(const uint32_t sr, const uint32_t ppq) : sr{sr}, ppq{ppq} {
-};
-
 void Clock::set_bpm(const uint32_t bpm) {
     ticks_per_pulse = sr / (ppq * bpm / 60.f);
 }

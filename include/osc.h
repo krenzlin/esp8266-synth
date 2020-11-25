@@ -14,9 +14,9 @@ namespace osc {
     };
 
     class Sampler {
-        uint32_t index {0};
-        uint32_t len_ {0};
         const uint16_t *sample_;
+        uint32_t len_ {0};
+        uint32_t index {0};
 
         public:
             Sampler(uint16_t sample[], const uint32_t len) : sample_{sample}, len_{len}, index{len} {};
