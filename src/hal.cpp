@@ -12,7 +12,7 @@ void hal::i2s::write(uint32_t sample) {
     i2s_write_sample(sample);
 }
 
-void hal::i2s::write(uint32_t left, uint32_t right) {
+void hal::i2s::write(uint32_t left, uint32_t right) {  // looking at the assembly using int32 saved one conversion compared to int16
     i2s_write_sample(left << 16 | right);
 }
 

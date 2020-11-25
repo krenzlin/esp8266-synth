@@ -10,7 +10,7 @@ uint16_t osc::Saw::sample() {
     uint16_t sample = phase;
 
     phase += p_incr;
-    if (phase > 0xFFFF) {
+    if (phase > 0xFFFF) {  // compiler will optimize this away as int16 wraps around 0xFFFF
         phase -= 0xFFFF;
     }
 
