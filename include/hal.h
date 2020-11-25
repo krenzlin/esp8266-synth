@@ -5,7 +5,7 @@ namespace hal {
     namespace i2s {
         void init(int sr=44100);
         void write(uint32_t sample);
-        void write(uint16_t left, uint16_t right);
+        void write(uint32_t left, uint32_t right);
     }
 
     namespace wifi {

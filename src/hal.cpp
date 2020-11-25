@@ -12,7 +12,7 @@ void hal::i2s::write(uint32_t sample) {
     i2s_write_sample(sample);
 }
 
-void hal::i2s::write(uint16_t left, uint16_t right) {
+void hal::i2s::write(uint32_t left, uint32_t right) {
     i2s_write_sample(left << 16 | right);
 }
 
