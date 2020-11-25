@@ -2,6 +2,7 @@
 #include <stdint.h>
 
 namespace osc {
+    const uint16_t ZERO = 0xFFFF >> 1;
 
     class Saw {
         uint16_t phase {0};
