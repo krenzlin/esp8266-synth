@@ -1,12 +1,13 @@
 #pragma once
 #include <stdint.h>
 #include <functional>
+#include "config.h"
 
 using cb_t = std::function<void()>;
 
 class Clock {
     public:
-        Clock(const uint32_t sr=44100, const uint32_t ppq=24);
+        Clock(const uint32_t sr=config::sr, const uint32_t ppq=config::ppq);
 
         uint32_t ticks {0};
         bool running {false};
