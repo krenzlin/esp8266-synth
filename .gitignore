@@ -1,3 +1,5 @@
 /py38/
 /build/
 /bin/
+/manuals/
+/.vscode/settings.json
