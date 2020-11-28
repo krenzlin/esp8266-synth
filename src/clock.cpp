@@ -24,16 +24,40 @@ void Clock::tick() {
         return;
     }
 
-    ticks += 1;
+    if (ticks == 0) {
+        pulse();
+    }
 
+    ticks += 1;
     if (ticks >= ticks_per_pulse) {
-        if (pulse_cb != nullptr) {
-            pulse_cb();
-        }
         ticks = 0;
+    }
+}
+
+void Clock::pulse() {
+    if (pulse_cb != nullptr) pulse_cb();
+    if ((pulses % ppq == 0) && quarter_cb != nullptr) quarter_cb();
+    if ((pulses % ppq >> 1 == 0) && eigth_cb != nullptr) eigth_cb();
+    if ((pulses % ppq >> 2 == 0) && sixteenth_cb != nullptr) sixteenth_cb();
+
+    pulses += 1;
+    if (pulses >= ppq) {
+        pulses = 0;
     }
 }
 
 void Clock::set_pulse_callback(const cb_t cb) {
     pulse_cb = cb;
+}
+
+void Clock::set_quarter_callback(const cb_t cb) {
+    quarter_cb = cb;
+}
+
+void Clock::set_eigth_callback(const cb_t cb) {
+    eigth_cb = cb;
+}
+
+void Clock::set_sixteenth_callback(const cb_t cb) {
+    sixteenth_cb = cb;
 }

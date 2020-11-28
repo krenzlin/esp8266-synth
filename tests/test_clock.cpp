@@ -105,21 +105,36 @@ class Mock {
 
 
 TEST_CASE("Clock callback", "[Clock]") {
+    auto mock = Mock();
     auto clock = Clock(2, 1);
+    auto cb = [&]() mutable {mock.call();};
+    clock.set_pulse_callback(cb);
+
     clock.start(60);
     REQUIRE(clock.ticks_per_pulse == 2);
+    REQUIRE(mock.called == false);
+
 
     SECTION("call function") {
-        auto mock = Mock();
-        auto cb = [&]() mutable {mock.call();};
-        clock.set_pulse_callback(cb);
-
         clock.tick();
         REQUIRE(clock.ticks == 1);
-        REQUIRE(mock.called == false);
-
-        clock.tick();
-        REQUIRE(clock.ticks == 0);
         REQUIRE(mock.called == true);
     }
+
+    SECTION("call on clock start") {
+        clock.stop();
+        REQUIRE(mock.called == false);
+        clock.start();
+        clock.tick();
+        REQUIRE(mock.called == true);
+    }
+}
+
+TEST_CASE("Clock ticks and pulses", "[Clock]") {
+    auto clock = Clock(2, 1);
+    clock.set_bpm(60);
+
+    REQUIRE(clock.ticks_per_pulse == 2);
+    REQUIRE(clock.ticks == 0);
+    REQUIRE(clock.pulses == 0);
 }

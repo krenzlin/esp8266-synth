@@ -12,17 +12,25 @@ class Clock {
         uint32_t sr {0};
         uint32_t ppq {0};
         uint32_t ticks {0};
+        uint32_t pulses {0};
         bool running {false};
         uint32_t bpm {0};
         uint32_t ticks_per_pulse {0};
 
         cb_t pulse_cb {};
+        cb_t quarter_cb {};
+        cb_t eigth_cb {};
+        cb_t sixteenth_cb {};
 
         void set_bpm(const uint32_t bpm);
         void start();
         void start(const uint32_t bpm);
         void stop();
         void tick();
+        void pulse();
 
         void set_pulse_callback(const cb_t cb);
+        void set_quarter_callback(const cb_t cb);
+        void set_eigth_callback(const cb_t cb);
+        void set_sixteenth_callback(const cb_t cb);
 };
