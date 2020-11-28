@@ -1,18 +1,13 @@
 #include "pattern.h"
 
+bool bd[8] = {1, 0, 1, 0, 1, 0, 1, 0};
+bool sn[8] = {0, 0, 1, 0, 0, 1, 0, 1};
+bool hh[8] = {1, 1, 1, 1, 1, 1, 1, 1};
+
 void Pattern::step() {
-    // hihat on every step
-    drums_->on(44);
-
-    // kick
-    if (steps % 2) {
-        drums_->on(35);
-    }
-
-    // snare
-    if (steps % 4) {
-        drums_->on(38);
-    }
+    if (bd[steps]) drums_->on(35);
+    if (sn[steps]) drums_->on(38);
+    if (hh[steps]) drums_->on(44);
 
     steps += 1;
     if (steps >= 8) {

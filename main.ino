@@ -8,7 +8,7 @@
 auto drums = Drums();
 auto pattern = Pattern(&drums);
 auto clk = Clock(44100, 1);
-uint16_t bpm {120};
+uint16_t bpm {160};
 
 
 void setup() {
@@ -17,7 +17,7 @@ void setup() {
     hal::i2s::init(44100);
 
     auto cb = [&]() mutable {pattern.step();};
-    clk.set_pulse_callback(cb);
+    clk.set_eigth_callback(cb);
     clk.start(bpm);
 }
 
