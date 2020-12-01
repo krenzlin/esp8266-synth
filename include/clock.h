@@ -7,10 +7,12 @@ using cb_t = std::function<void()>;
 
 class Clock {
     public:
-        Clock(const uint32_t sr=config::sr, const uint32_t ppq=config::ppq) : sr{sr}, ppq{ppq} {}
+        Clock(const uint32_t sr=config::sr, const uint32_t ppq=config::ppq) : sr{sr}, ppq{ppq}, pp8{ppq >> 1}, pp16{ppq >> 2} {}
 
         uint32_t sr {0};
         uint32_t ppq {0};
+        uint32_t pp8 {0};
+        uint32_t pp16 {0};
         uint32_t ticks {0};
         uint32_t pulses {0};
         bool running {false};
@@ -28,6 +30,7 @@ class Clock {
         void stop();
         void tick();
         void pulse();
+        void call(const cb_t func);
 
         void set_pulse_callback(const cb_t cb);
         void set_quarter_callback(const cb_t cb);
