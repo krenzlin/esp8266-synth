@@ -1,5 +1,6 @@
 #include "hal.h"
 #include "clock.h"
+#include "config.h"
 #include "osc.h"
 #include "misc.h"
 #include "drums.h"
@@ -7,7 +8,7 @@
 
 auto drums = Drums();
 auto pattern = Pattern(&drums);
-auto clk = Clock(44100, 1);
+auto clk = Clock(config::sr, config::ppq);
 uint16_t bpm {160};
 
 
@@ -17,7 +18,7 @@ void setup() {
     hal::i2s::init(44100);
 
     auto cb = [&]() mutable {pattern.step();};
-    clk.set_eigth_callback(cb);
+    clk.set_sixteenth_callback(cb);
     clk.start(bpm);
 }
 

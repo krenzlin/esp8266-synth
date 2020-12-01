@@ -37,8 +37,8 @@ void Clock::tick() {
 void Clock::pulse() {
     if (pulse_cb != nullptr) pulse_cb();
     if ((pulses % ppq == 0) && quarter_cb != nullptr) quarter_cb();
-    if ((pulses % ppq >> 1 == 0) && eigth_cb != nullptr) eigth_cb();
-    if ((pulses % ppq >> 2 == 0) && sixteenth_cb != nullptr) sixteenth_cb();
+    if (((pulses % (ppq >> 1)) == 0) && eigth_cb != nullptr) eigth_cb();
+    if (((pulses % (ppq >> 2)) == 0) && sixteenth_cb != nullptr) sixteenth_cb();
 
     pulses += 1;
     if (pulses >= ppq) {
