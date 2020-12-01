@@ -22,3 +22,7 @@ uint32_t misc::pcm_to_pdm(uint16_t sample) {
 
     return pdm;
 }
+
+uint32_t misc::ticks_per_pulse(uint32_t sr, uint32_t bpm, uint32_t ppq) {
+    return sr / (ppq * bpm / 60.f);
+}

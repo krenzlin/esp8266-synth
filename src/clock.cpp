@@ -1,7 +1,9 @@
 #include "clock.h"
+#include "misc.h"
+
 
 void Clock::set_bpm(const uint32_t bpm) {
-    ticks_per_pulse = sr / (ppq * bpm / 60.f);
+    ticks_per_pulse = misc::ticks_per_pulse(sr, bpm, ppq);
 }
 
 void Clock::start() {
