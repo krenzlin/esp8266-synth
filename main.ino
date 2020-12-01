@@ -25,6 +25,6 @@ void setup() {
 
 void loop() {
     clk.tick();
-    uint16_t sample = drums.sample() >> 4;
+    uint16_t sample = drums.sample() >> 2;
     hal::i2s::write(sample, sample);
 }
