@@ -20,4 +20,4 @@ help:
 	$(ESPMAKE) help
 
 test:
-	g++ -Wall -Wpedantic tests/*.cpp src/osc.cpp src/clock.cpp -I include/ -o bin/test && bin/test
+	g++ -Wall -Wpedantic -g tests/*.cpp src/osc.cpp src/clock.cpp src/misc.cpp -I include/ -o bin/test && bin/test
