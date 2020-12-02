@@ -16,8 +16,18 @@ build:
 flash: build
 	$(ESPMAKE) flash
 
+run:
+	$(ESPMAKE) run
+
 help:
 	$(ESPMAKE) help
 
-test:
-	g++ -Wall -Wpedantic -g tests/*.cpp src/osc.cpp src/clock.cpp src/misc.cpp -I include/ -o bin/test && bin/test
+
+TEST_SRC_FILES := $(wildcard src/*.cpp) $(wildcard tests/*.cpp)
+TEST_SRC_FILES := $(filter-out src/hal.cpp, $(TEST_SRC_FILES))
+
+bin/test: $(TEST_SRC_FILES)
+	g++ -Wall -Wpedantic -g -o $@ $^ -I./include -I./src
+
+test: bin/test
+	bin/test
