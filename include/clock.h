@@ -28,6 +28,7 @@ class Clock {
         void start();
         void start(const uint32_t bpm);
         void stop();
+        void toogle();
         void tick();
         void pulse();
         void call(const cb_t func);

@@ -21,6 +21,10 @@ void Clock::stop() {
     running = false;
 }
 
+void Clock::toogle() {
+    running = !running;
+}
+
 void Clock::tick() {
     if (!running) {
         return;
