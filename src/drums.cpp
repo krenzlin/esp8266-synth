@@ -12,6 +12,5 @@ void Drums::on(const uint32_t note) {
 }
 
 uint16_t Drums::sample() {
-    uint16_t sample = bd.sample() + sn.sample() + hh.sample();
-    return sample >> 1;
+    return (bd.sample() + sn.sample() + hh.sample()) / 3;
 }
