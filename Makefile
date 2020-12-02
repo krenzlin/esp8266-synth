@@ -31,3 +31,11 @@ bin/test: $(TEST_SRC_FILES)
 
 test: bin/test
 	bin/test
+
+WRITE_SRC_FILES := write_to_file.cpp src/clock.cpp src/drums.cpp src/pattern.cpp src/osc.cpp src/misc.cpp
+bin/write: $(WRITE_SRC_FILES)
+	g++ -Wall -Wpedantic -g -o $@ $^ -I./include -I./src
+
+
+write: bin/write
+	bin/write
