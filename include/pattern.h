@@ -8,6 +8,6 @@ class Pattern {
 
     public:
         Pattern(Drums *drums) : drums_{drums} {};
-
-    void step();
+        void step();
+        void next_pattern();
 };

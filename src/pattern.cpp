@@ -10,12 +10,12 @@ void Pattern::step() {
     steps += 1;
     if (steps >= 32) {
         steps = 0;
-
-        pattern += 1;
-        if (pattern >= 25) {
-            pattern = 0;
-        }
     }
+}
 
-
+void Pattern::next_pattern() {
+    pattern += 1;
+    if (pattern >= 25) {
+        pattern = 0;
+    }
 }
