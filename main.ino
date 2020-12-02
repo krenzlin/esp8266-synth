@@ -29,6 +29,6 @@ void loop() {
         drummer.next_pattern();
     }
     clk.tick();
-    uint16_t sample = drums.sample() >> 2;
+    uint16_t sample = drums.sample() >> 1;
     hal::i2s::write(sample, sample);
 }

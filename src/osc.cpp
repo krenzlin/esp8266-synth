@@ -35,5 +35,5 @@ uint16_t osc::Sampler::sample() {
         index++;
     }
 
-    return sample;
+    return sample * vol;
 }
