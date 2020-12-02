@@ -10,6 +10,7 @@ auto drums = Drums();
 auto pattern = Pattern(&drums);
 auto clk = Clock(config::sr, config::ppq);
 uint16_t bpm {160};
+auto start_stop = hal::Button();
 
 
 void setup() {
@@ -24,6 +25,9 @@ void setup() {
 
 
 void loop() {
+    if (start_stop.is_pressed()) {
+        clk.toogle();
+    }
     clk.tick();
     uint16_t sample = drums.sample() >> 2;
     hal::i2s::write(sample, sample);

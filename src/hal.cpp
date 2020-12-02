@@ -26,3 +26,27 @@ void hal::wifi::turn_off() {
 void hal::set_cpu_freq(const uint8_t freq) {
     system_update_cpu_freq(freq);
 }
+
+
+hal::Button::Button() {
+    pin = D6;
+    pinMode(pin, INPUT_PULLUP);
+}
+
+void hal::Button::update() {
+    history <<= 1;
+    history |= (digitalRead(pin) == 0);
+}
+
+const uint8_t _MASK {0b11000111};
+const uint8_t _RISING {0b00000111};
+const uint8_t _PRESSED {0b11111111};
+
+bool hal::Button::is_pressed() {
+    update();
+    if ((history & _MASK) == _RISING) {
+        history = _PRESSED;
+        return true;
+    }
+    return false;
+}

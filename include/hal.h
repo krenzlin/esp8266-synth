@@ -14,4 +14,15 @@ namespace hal {
     }
 
     void set_cpu_freq(const uint8_t freq);
+
+    class Button {
+        public:
+            uint8_t pin;
+            uint32_t history {0};
+
+            void update();
+
+            Button();
+            bool is_pressed();
+    };
 }
