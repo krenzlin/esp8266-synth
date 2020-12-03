@@ -1,4 +1,4 @@
-.PHONY: build flash
+.PHONY: build flash run help test write
 
 MAKE_ESP_ARDUINO = /home/konrad/src/makeEspArduino/makeEspArduino.mk
 SKETCH = main.ino
