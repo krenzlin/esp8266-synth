@@ -1,5 +1,7 @@
 #include "osc.h"
 #include "luts.h"
+#include "misc.h"
+#include "dsp.h"
 #if ARDUINO
 #include "pgmspace.h"
 #endif
@@ -21,12 +23,14 @@ uint16_t osc::Saw::sample() {
 
 void osc::Sampler::on(const uint32_t note) {
     index = 0;
+    end_ = len_; // * misc::fast_float_rand();
+    vol = max_vol; // * misc::fast_float_rand();
 }
 
 uint16_t osc::Sampler::sample() {
     uint16_t sample {osc::ZERO};
 
-    if (index < len_) {
+    if (index < end_) {
 #if ARDUINO
         sample = pgm_read_word_near(sample_ + index);
 #else
@@ -35,5 +39,5 @@ uint16_t osc::Sampler::sample() {
         index++;
     }
 
-    return sample * vol;
+    return dsp::volume(sample, vol);
 }

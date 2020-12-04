@@ -17,10 +17,19 @@ namespace osc {
         const uint16_t *sample_;
         uint32_t len_ {0};
         uint32_t index {0};
+        uint32_t end_ {0};
+        float max_vol {1.0f};
         float vol {1.0f};
 
         public:
-            Sampler(const uint16_t sample[], const uint32_t len, const float vol=1.f) : sample_{sample}, len_{len}, index{len}, vol{vol} {};
+            Sampler(const uint16_t sample[], const uint32_t len, const float vol=1.f) :
+                sample_{sample},
+                len_{len},
+                index{len},
+                end_{len},
+                max_vol{vol},
+                vol{vol}
+                {};
             uint16_t sample();
             void on(const uint32_t note);
     };
