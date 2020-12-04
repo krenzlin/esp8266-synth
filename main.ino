@@ -1,6 +1,6 @@
 #include "hal.h"
 #include "clock.h"
-#include "config.h"
+#include "cfg.h"
 #include "osc.h"
 #include "misc.h"
 #include "drums.h"
@@ -8,7 +8,7 @@
 
 auto drums = Drums();
 auto drummer = Pattern(&drums);
-auto clk = Clock(config::sr, config::ppq);
+auto clk = Clock(cfg::sr, cfg::ppq);
 uint16_t bpm {160};
 auto start_stop = hal::Button();
 

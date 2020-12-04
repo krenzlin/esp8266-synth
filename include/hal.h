@@ -1,10 +1,10 @@
 #pragma once
 #include <stdint.h>
-#include "config.h"
+#include "cfg.h"
 
 namespace hal {
     namespace i2s {
-        void init(const uint32_t sr=config::sr);
+        void init(const uint32_t sr=cfg::sr);
         void write(const uint32_t sample);
         void write(const uint32_t left, const uint32_t right);
     }

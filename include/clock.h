@@ -1,13 +1,13 @@
 #pragma once
 #include <stdint.h>
 #include <functional>
-#include "config.h"
+#include "cfg.h"
 
 using cb_t = std::function<void()>;
 
 class Clock {
     public:
-        Clock(const uint32_t sr=config::sr, const uint32_t ppq=config::ppq) : sr{sr}, ppq{ppq}, pp8{ppq >> 1}, pp16{ppq >> 2} {}
+        Clock(const uint32_t sr=cfg::sr, const uint32_t ppq=cfg::ppq) : sr{sr}, ppq{ppq}, pp8{ppq >> 1}, pp16{ppq >> 2} {}
 
         uint32_t sr {0};
         uint32_t ppq {0};

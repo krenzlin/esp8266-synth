@@ -1,5 +1,5 @@
 #include "misc.h"
-#include "config.h"
+#include "cfg.h"
 
 const uint16_t MAX_16BIT {0xFFFF};
 
@@ -40,7 +40,7 @@ a = 7^5 = 16,807
 update: a = 48271
 */
 uint32_t misc::fast_rand() {
-    static uint32_t X_k {config::random_seed};
+    static uint32_t X_k {cfg::random_seed};
     const uint32_t a {48271};
     const uint32_t m {2147483647};
 
@@ -49,7 +49,7 @@ uint32_t misc::fast_rand() {
 }
 
 float misc::fast_float_rand() {
-    static uint32_t X_k {config::random_seed};
+    static uint32_t X_k {cfg::random_seed};
     constexpr uint32_t a = 16807;
     constexpr float m_1 = 4.6566129e-010f; // 1/(2^31-1) = 1/2147483647
 
