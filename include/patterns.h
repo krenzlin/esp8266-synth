@@ -406,6 +406,9 @@ const uint8_t* const node_table[25] = {
   node_24,
 };
 
+const uint8_t BD = 0;
+const uint8_t SN = 1;
+const uint8_t HH = 2;
 
 uint8_t beat(uint32_t pattern, uint32_t instrument, uint32_t step) {
     return node_table[pattern][instrument * 32 + step];

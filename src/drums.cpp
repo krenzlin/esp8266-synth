@@ -2,11 +2,11 @@
 #include "osc.h"
 
 void Drums::on(const uint32_t note) {
-    if (note == 35) {
+    if (note == BD_NOTE) {
         bd.on(0);
-    } else if (note == 38) {
+    } else if (note == SN_NOTE) {
         sn.on(0);
-    } else if (note == 44) {
+    } else if (note == HH_NOTE) {
         hh.on(0);
     }
 }

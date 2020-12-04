@@ -3,8 +3,9 @@
 
 class Pattern {
     Drums *drums_;
-    uint16_t steps {0};
-    uint32_t pattern {11};
+    uint16_t step_ {0};
+    uint32_t pattern_ {11};
+    uint32_t steps_ {32};
 
     public:
         Pattern(Drums *drums) : drums_{drums} {};
