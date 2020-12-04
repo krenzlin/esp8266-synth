@@ -23,19 +23,27 @@ help:
 	$(ESPMAKE) help
 
 
+CPP_FLAGS=-Wall -Wpedantic -g
+INCLUDES=-I./include -I./src
+
 TEST_SRC_FILES := $(wildcard src/*.cpp) $(wildcard tests/*.cpp)
 TEST_SRC_FILES := $(filter-out src/hal.cpp, $(TEST_SRC_FILES))
+TEST_OBJS := $(addprefix build/, $(TEST_SRC_FILES:.cpp=.o))
 
-bin/test: $(TEST_SRC_FILES)
-	g++ -Wall -Wpedantic -g -o $@ $^ -I./include -I./src
+bin/test: $(TEST_OBJS)
+	g++ $(CPP_FLAGS) $(INCLUDES) -o $@ $^
 
 test: bin/test
 	bin/test
 
 WRITE_SRC_FILES := write_to_file.cpp src/clock.cpp src/drums.cpp src/pattern.cpp src/osc.cpp src/misc.cpp src/dsp.cpp
-bin/write: $(WRITE_SRC_FILES)
-	g++ -Wall -Wpedantic -g -o $@ $^ -I./include -I./src
-
+WRITE_OBJS := $(addprefix build/, $(WRITE_SRC_FILES:.cpp=.o))
+bin/write: $(WRITE_OBJS)
+	g++ $(CPP_FLAGS) $(INCLUDES) -o $@ $^
 
 write: bin/write
 	bin/write
+
+build/%.o : %.cpp
+	@mkdir -p $(dir $@)
+	g++ $(CPP_FLAGS) $(INCLUDES) -c $< -o $@
