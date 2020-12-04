@@ -56,3 +56,7 @@ float misc::fast_float_rand() {
     X_k *=  a;
     return (float) X_k * m_1 / 2.f;
 }
+
+float misc::velocity_to_volume(uint32_t velocity) {
+    return (float) velocity / 127.0;
+}

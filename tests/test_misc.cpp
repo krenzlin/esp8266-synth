@@ -18,3 +18,10 @@ TEST_CASE("fast_float_rand", "[Misc]") {
         REQUIRE(x <= 1.f);
     }
 }
+
+
+TEST_CASE("velocity_to_volume", "[misc]") {
+    REQUIRE(misc::velocity_to_volume(127) == 1.f);
+    REQUIRE(misc::velocity_to_volume(0) == 0.f);
+    REQUIRE(misc::velocity_to_volume(127 >> 1) == Approx(0.49606f));
+}

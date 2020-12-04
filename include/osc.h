@@ -31,6 +31,6 @@ namespace osc {
                 vol_{vol}
                 {};
             uint16_t sample();
-            void on(const uint32_t note);
+            void on(const uint32_t note=0, const uint32_t velocity=127);
     };
 }

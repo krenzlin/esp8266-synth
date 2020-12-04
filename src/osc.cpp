@@ -21,10 +21,9 @@ uint16_t osc::Saw::sample() {
     return sample;
 }
 
-void osc::Sampler::on(const uint32_t note) {
+void osc::Sampler::on(const uint32_t note, uint32_t velocity) {
     index_ = 0;
-    end_ = len_; // * misc::fast_float_rand();
-    vol_ = max_vol_; // * misc::fast_float_rand();
+    vol_ = misc::velocity_to_volume(velocity);
 }
 
 uint16_t osc::Sampler::sample() {
