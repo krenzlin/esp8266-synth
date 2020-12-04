@@ -405,3 +405,8 @@ const uint8_t* const node_table[25] = {
   node_23,
   node_24,
 };
+
+
+uint8_t beat(uint32_t pattern, uint32_t instrument, uint32_t step) {
+    return node_table[pattern][instrument * 32 + step];
+}

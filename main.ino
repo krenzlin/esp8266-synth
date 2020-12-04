@@ -8,7 +8,7 @@
 #include "drummer.h"
 
 auto drums = Drums();
-auto drummer = RandomDrummer(&drums);
+auto drummer = Pattern(&drums);
 auto clk = Clock(cfg::sr, cfg::ppq);
 uint16_t bpm {160};
 auto start_stop = hal::Button();
