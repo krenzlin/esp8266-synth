@@ -31,7 +31,7 @@ uint16_t osc::Sampler::sample() {
 
     if (index_ < end_) {
 #if ARDUINO
-        sample = pgm_read_word_near(sample_ + index);
+        sample = pgm_read_word_near(sample_ + index_);
 #else
         sample = sample_[index_];
 #endif
