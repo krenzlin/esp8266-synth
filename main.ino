@@ -10,7 +10,7 @@
 auto drums = Drums();
 auto drummer = Pattern(&drums);
 auto clk = Clock(cfg::sr, cfg::ppq);
-uint16_t bpm {160};
+uint16_t bpm {120};
 auto start_stop = hal::Button();
 
 

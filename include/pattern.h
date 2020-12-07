@@ -4,7 +4,7 @@
 class Pattern {
     Drums *drums_;
     uint16_t step_ {0};
-    uint32_t pattern_ {11};
+    uint32_t pattern_ {25};
     uint32_t steps_ {32};
     uint32_t bd_[32];
     uint32_t sn_[32];
