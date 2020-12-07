@@ -4,7 +4,7 @@
 #include <stdio.h>
 
 #include "clock.h"
-#include "config.h"
+#include "cfg.h"
 #include "drums.h"
 #include "pattern.h"
 #include "808.h"
@@ -13,9 +13,8 @@
 int main() {
     auto drums = Drums();
     auto drummer = Pattern(&drums);
-    auto clk = Clock(config::sr, config::ppq);
-    auto kick = osc::Sampler(samples::Kick13_mugent, samples::Kick13_mugent_len);
-    kick.on(0);
+    auto clk = Clock(cfg::sr, cfg::ppq);
+    drummer.next_pattern();
 
     auto cb = [&]() mutable {drummer.step();};
     clk.set_sixteenth_callback(cb);
@@ -26,7 +25,7 @@ int main() {
     std::FILE* file = std::fopen("generated.raw", "wb");
 
     int ms = 10000;
-    int n_samples = int(config::sr * ms/1000.0);
+    int n_samples = int(cfg::sr * ms/1000.0);
 
     for (auto i=0; i<n_samples; i++) {
         clk.tick();
