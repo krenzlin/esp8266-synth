@@ -1,16 +1,16 @@
 #pragma once
 #include <stdint.h>
 #include "osc.h"
-#include "808.h"
+#include "acoustic.h"
 
 const uint8_t BD_NOTE = 35;
 const uint8_t SN_NOTE = 38;
 const uint8_t HH_NOTE = 44;
 
 class Drums {
-    osc::Sampler bd {osc::Sampler(samples::Kick13_mugent, samples::Kick13_mugent_len, 1.0)};
-    osc::Sampler sn {osc::Sampler(samples::Snare7_mugent, samples::Snare7_mugent_len, 0.6)};
-    osc::Sampler hh {osc::Sampler(samples::CH5_mugent, samples::CH5_mugent_len, 0.3)};
+    osc::Sampler bd {osc::Sampler(samples::RD_K_2, samples::RD_K_2_len, 1.0)};
+    osc::Sampler sn {osc::Sampler(samples::RD_S_9, samples::RD_S_9_len, 0.8)};
+    osc::Sampler hh {osc::Sampler(samples::RD_C_R_11, samples::RD_C_R_11_len, 0.1)};
 
     public:
         void on(const uint32_t note);
