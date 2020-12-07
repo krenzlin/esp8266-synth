@@ -11,9 +11,9 @@ bool rand_trigger(uint32_t pattern, uint32_t instrument, uint32_t step) {
 }
 
 void Pattern::step() {
-    if (rand_trigger(pattern_, BD, step_)) drums_->on(BD_NOTE);
-    if (rand_trigger(pattern_, SN, step_)) drums_->on(SN_NOTE);
-    if (rand_trigger(pattern_, HH, step_)) drums_->on(HH_NOTE);
+    if (bd_[step_]) drums_->on(BD_NOTE);
+    if (sn_[step_]) drums_->on(SN_NOTE);
+    if (hh_[step_]) drums_->on(HH_NOTE);
 
     step_ += 1;
     if (step_ >= steps_) {
@@ -22,8 +22,13 @@ void Pattern::step() {
 }
 
 void Pattern::next_pattern() {
-    pattern_ += 1;
-    if (pattern_ >= 25) {
-        pattern_ = 0;
+    for (uint32_t i=0; i<steps_; i++) {
+        this->bd_[i] = (rand_trigger(pattern_, BD, i));
+    }
+    for (uint32_t i=0; i<steps_; i++) {
+        this->sn_[i] = (rand_trigger(pattern_, SN, i));
+    }
+    for (uint32_t i=0; i<steps_; i++) {
+        this->hh_[i] = (rand_trigger(pattern_, HH, i));
     }
 }
