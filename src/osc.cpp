@@ -23,7 +23,7 @@ uint16_t osc::Saw::sample() {
 
 void osc::Sampler::on(const uint32_t note, uint32_t velocity) {
     index_ = 0;
-    vol_ = misc::velocity_to_volume(velocity);
+    vol_ = misc::velocity_to_volume(velocity) * max_vol_;
 }
 
 uint16_t osc::Sampler::sample() {

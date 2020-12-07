@@ -2,7 +2,7 @@
 #include "patterns.h"
 #include "misc.h"
 
-bool rand_trigger(uint32_t pattern, uint32_t instrument, uint32_t step) {
+uint8_t rand_trigger(uint32_t pattern, uint32_t instrument, uint32_t step) {
     uint32_t value = beat(pattern, instrument, step);
     if (misc::fast_float_rand() < value / 255.0) {
         return true;

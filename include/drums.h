@@ -13,6 +13,6 @@ class Drums {
     osc::Sampler hh {osc::Sampler(samples::RD_C_R_11, samples::RD_C_R_11_len, 0.1)};
 
     public:
-        void on(const uint32_t note);
+        void on(const uint32_t note, const uint32_t velocity=127);
         uint16_t sample();
 };
