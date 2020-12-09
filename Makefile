@@ -7,7 +7,7 @@ BUILD_DIR = ./build
 UPLOAD_SPEED = 921600
 CHIP = esp8266
 BOARD = d1_mini
-BUILD_EXTRA_FLAGS = -O2 -Wall -Wpedantic
+BUILD_EXTRA_FLAGS = -O2 -Wall -Wpedantic -Wextra
 
 ESPMAKE = make -f $(MAKE_ESP_ARDUINO) SKETCH=$(SKETCH) CUSTOM_LIBS=$(LIBS) BUILD_DIR=$(BUILD_DIR) UPLOAD_SPEED=$(UPLOAD_SPEED) CHIP=$(CHIP) BOARD=$(BOARD) BUILD_EXTRA_FLAGS=$(BUILD_EXTRA_FLAGS) EXCLUDE_DIRS=./tests
 
@@ -24,7 +24,7 @@ help:
 	$(ESPMAKE) help
 
 
-CPP_FLAGS=-Wall -Wpedantic -g
+CPP_FLAGS=-Wall -Wpedantic -Wextra -g
 INCLUDES=-I./include -I./src
 
 TEST_SRC_FILES := $(wildcard src/*.cpp) $(wildcard tests/*.cpp)

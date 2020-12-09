@@ -8,15 +8,15 @@ RandomDrummer::RandomDrummer(Drums *drums) {
 }
 
 void RandomDrummer::next_pattern() {
-    for (auto i=0; i<steps_; i++) {
+    for (uint32_t i=0; i<steps_; i++) {
         this->bd_[i] = (misc::fast_float_rand() > 0.8);
     }
 
-    for (auto i=0; i<steps_; i++) {
+    for (uint32_t i=0; i<steps_; i++) {
         this->sn_[i] = (misc::fast_float_rand() > 0.8);
     }
 
-    for (auto i=0; i<steps_; i++) {
+    for (uint32_t i=0; i<steps_; i++) {
         this->hh_[i] = (misc::fast_float_rand() > 0.5);
     }
 }
