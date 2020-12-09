@@ -1,3 +1,5 @@
+import re
+
 import numpy as np
 from pathlib import Path
 from scipy.io import wavfile
@@ -34,6 +36,7 @@ if __name__ == "__main__":
             assert data.max() <= 0xFFFF
 
             name = sample_file.name[:-4]
+            name = re.sub("[,.\- ]", "_", name)
             print(name)
 
             f.write(f"const uint32_t {name}_len = {data.size};\n")
