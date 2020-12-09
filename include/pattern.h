@@ -11,7 +11,7 @@ class Pattern {
     uint32_t hh_[32];
 
     public:
-        Pattern(Drums *drums) : drums_{drums} {init();};
+        Pattern(Drums *drums, uint32_t pattern=26) : drums_{drums}, pattern_{pattern} {init();};
         void init();
         void step();
         void next_pattern();
