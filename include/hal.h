@@ -18,7 +18,7 @@ namespace hal {
     class Button {
         public:
             uint8_t pin;
-            uint32_t history {0};
+            uint8_t history {0};
 
             void update();
 
