@@ -14,5 +14,5 @@ class Drums {
 
     public:
         void on(const uint32_t note, const uint32_t velocity=127);
-        uint16_t sample();
+        int16_t sample();
 };

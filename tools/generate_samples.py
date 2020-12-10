@@ -30,10 +30,10 @@ if __name__ == "__main__":
             print("-"*5, sample_file, "-"*5)
             sr, raw_data = wavfile.read(sample_file)
             print("sr:", sr)
-            data = np.array(raw_data) + 0x8000
+            data = np.array(raw_data)# + 0x8000
             print("min/max/size:", data.min(), data.max(), data.size)
-            assert data.min() >= 0
-            assert data.max() <= 0xFFFF
+            assert data.min() >= -0x8000
+            assert data.max() <= 0x7FFF
 
             name = sample_file.name[:-4]
             name = re.sub("[,.\- ]", "_", name)
@@ -41,6 +41,6 @@ if __name__ == "__main__":
 
             f.write(f"const uint32_t {name}_len = {data.size};\n")
             str_data = ", ".join(str(value) for value in data)
-            f.write(f"const uint16_t {name}[{name}_len] PROGMEM = {{\n{str_data}\n}};\n\n")
+            f.write(f"const int16_t {name}[{name}_len] PROGMEM = {{\n{str_data}\n}};\n\n")
 
         f.write(postamble)

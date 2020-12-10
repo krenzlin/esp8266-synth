@@ -26,8 +26,8 @@ void osc::Sampler::on(const uint32_t /*note*/, uint32_t velocity) {
     vol_ = misc::velocity_to_volume(velocity) * max_vol_;
 }
 
-uint16_t osc::Sampler::sample() {
-    uint16_t sample {osc::ZERO};
+int16_t osc::Sampler::sample() {
+    int16_t sample {0};
 
     if (index_ < end_) {
 #if ARDUINO
@@ -38,5 +38,5 @@ uint16_t osc::Sampler::sample() {
         index_++;
     }
 
-    return dsp::volume(sample, vol_);
+    return sample * vol_;
 }

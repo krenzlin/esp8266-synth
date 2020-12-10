@@ -11,6 +11,6 @@ void Drums::on(const uint32_t note, const uint32_t velocity) {
     }
 }
 
-uint16_t Drums::sample() {
+int16_t Drums::sample() {
     return (bd.sample() + sn.sample() + hh.sample()) / 3;
 }

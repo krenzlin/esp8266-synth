@@ -29,8 +29,8 @@ int main() {
 
     for (auto i=0; i<n_samples; i++) {
         clk.tick();
-        uint16_t sample = drums.sample();
-        float f_sample = (sample - 0x7FFF) / (float) 0x8000;
+        int16_t sample = drums.sample();
+        float f_sample = sample / (float) 0x7FFF;
         //printf("%d -> %f\n", sample, f_sample);
         std::fwrite(&f_sample, sizeof(float), 1, file);
     }
