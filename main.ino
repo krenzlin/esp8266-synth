@@ -8,7 +8,7 @@
 #include "drummer.h"
 
 auto drums = Drums();
-auto drummer = Pattern(&drums);
+auto drummer = Pattern(&drums, 26);
 auto clk = Clock(cfg::sr, cfg::ppq);
 uint16_t bpm {120};
 auto start_stop = hal::Button();
@@ -20,7 +20,7 @@ void setup() {
     hal::i2s::init(44100);
 
     auto cb = [&]() mutable {drummer.step();};
-    clk.set_sixteenth_callback(cb);
+    clk.set_thirtysecond_callback(cb);
     clk.start(bpm);
 }
 

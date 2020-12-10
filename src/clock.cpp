@@ -45,6 +45,7 @@ void Clock::pulse() {
     if ((pulses % ppq) == 0) call(quarter_cb);
     if ((pulses % pp8) == 0) call(eigth_cb);
     if ((pulses % pp16) == 0) call(sixteenth_cb);
+    if ((pulses % pp32) == 0) call(thirtysecond_cb);
 
     pulses += 1;
     if (pulses >= ppq) {
@@ -72,4 +73,8 @@ void Clock::set_eigth_callback(const cb_t cb) {
 
 void Clock::set_sixteenth_callback(const cb_t cb) {
     sixteenth_cb = cb;
+}
+
+void Clock::set_thirtysecond_callback(const cb_t cb) {
+    thirtysecond_cb = cb;
 }
