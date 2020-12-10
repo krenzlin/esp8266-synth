@@ -1,7 +1,6 @@
 #include "osc.h"
 #include "luts.h"
 #include "misc.h"
-#include "dsp.h"
 #if ARDUINO
 #include "pgmspace.h"
 #endif
