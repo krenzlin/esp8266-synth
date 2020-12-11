@@ -3,8 +3,8 @@
 
 
 TEST_CASE("basic interface", "[Clock]") {
-    auto sr = 8;
-    auto ppq = 4;
+    auto sr = 16;
+    auto ppq = 8;
     auto bpm = 60;
     auto clock = Clock(sr, ppq);
     clock.set_bpm(bpm);
@@ -67,10 +67,45 @@ TEST_CASE("basic interface", "[Clock]") {
 
 }
 
+TEST_CASE("ticks and pulses", "[Clock]") {
+    auto sr = 16;
+    auto ppq = 8;
+    auto bpm = 60;
+    auto clock = Clock(sr, ppq);
 
-TEST_CASE("pulses cycle", "[Clock]") {
-    auto sr = 8;
-    auto ppq = 4;
+    clock.set_bpm(bpm);
+    REQUIRE(clock.ticks_per_pulse == 2);
+    REQUIRE(clock.ticks == 0);
+    REQUIRE(clock.pulses == 0);
+
+    clock.start();
+    REQUIRE(clock.ticks == 0);
+    REQUIRE(clock.pulses == 0);
+
+    clock.tick();
+    REQUIRE(clock.ticks == 1);
+    REQUIRE(clock.pulses == 1); // first tick after start is a pulse
+
+    clock.tick();
+    REQUIRE(clock.ticks == 0);
+    REQUIRE(clock.pulses == 1);
+
+    clock.tick();
+    REQUIRE(clock.ticks == 1);
+    REQUIRE(clock.pulses == 2);
+
+    clock.tick();
+    REQUIRE(clock.ticks == 0);
+    REQUIRE(clock.pulses == 2);
+
+    clock.tick();
+    REQUIRE(clock.ticks == 1);
+    REQUIRE(clock.pulses == 3);
+}
+
+TEST_CASE("pulses cycle @ different bpm", "[Clock]") {
+    auto sr = 16;
+    auto ppq = 8;
     auto bpm = 60;
     auto clock = Clock(sr, ppq);
     clock.set_bpm(bpm);
@@ -104,6 +139,7 @@ TEST_CASE("pulses cycle", "[Clock]") {
 class Mock {
     public:
         bool called_pulse {false};
+        bool called_32 {false};
         bool called_16 {false};
         bool called_8 {false};
         bool called_4 {false};
@@ -116,6 +152,11 @@ class Mock {
         void cb_pulse() {
             called_pulse = true;
         }
+
+        void cb_32() {
+            called_32 = true;
+        }
+
         void cb_16() {
             called_16 = true;
         }
@@ -130,32 +171,32 @@ class Mock {
 
         void reset() {
             called_pulse = false;
+            called_32 = false;
             called_16 = false;
             called_8 = false;
             called_4 = false;
         }
 };
 
-
 TEST_CASE("calls all callbacks", "[Clock]") {
-    auto sr = 8;
-    auto ppq = 4;
-    auto clock = Clock(sr, ppq);
-    clock.set_bpm(60);
-    REQUIRE(clock.ticks_per_pulse == 2);
+    auto ppq = 8; // 1/4 = 8 pulses, 1/8 = 4 pulses, 1/16 = 2 pulses, 1/32 = 1 pulse
+    auto clock = Clock(0, ppq); // sr is not important
 
     auto mock = Mock();
     auto cb_pulse = [&]() mutable {mock.cb_pulse();};
+    auto cb_32 = [&]() mutable {mock.cb_32();};
     auto cb_16 = [&]() mutable {mock.cb_16();};
     auto cb_8 = [&]() mutable {mock.cb_8();};
     auto cb_4 = [&]() mutable {mock.cb_4();};
 
     clock.set_pulse_callback(cb_pulse);
+    clock.set_thirtysecond_callback(cb_32);
     clock.set_sixteenth_callback(cb_16);
     clock.set_eigth_callback(cb_8);
     clock.set_quarter_callback(cb_4);
 
     REQUIRE_FALSE(mock.called_pulse);
+    REQUIRE_FALSE(mock.called_32);
     REQUIRE_FALSE(mock.called_16);
     REQUIRE_FALSE(mock.called_8);
     REQUIRE_FALSE(mock.called_4);
@@ -164,51 +205,92 @@ TEST_CASE("calls all callbacks", "[Clock]") {
 
     SECTION("full tick cycle") {
 
-        // 1.+.2
+        // 1.e.+.a.2
         // ^
-        clock.tick();
+        clock.pulse();
         REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
         REQUIRE(mock.called_16);
         REQUIRE(mock.called_8);
         REQUIRE(mock.called_4);
         mock.reset();
 
-        // 1.+.2
+        // 1.e.+.a.2
         //  ^
-        clock.tick();
-        REQUIRE_FALSE(mock.called_pulse);
-        clock.tick();
+        clock.pulse();
         REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
+        REQUIRE_FALSE(mock.called_16);
+        REQUIRE_FALSE(mock.called_8);
+        REQUIRE_FALSE(mock.called_4);
+        mock.reset();
+
+        // 1.e.+.a.2
+        //   ^
+        clock.pulse();
+        REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
         REQUIRE(mock.called_16);
         REQUIRE_FALSE(mock.called_8);
         REQUIRE_FALSE(mock.called_4);
         mock.reset();
 
-        // 1.+.2
-        //   ^
-        clock.tick();
-        clock.tick();
+
+        // 1.e.+.a.2
+        //    ^
+        clock.pulse();
         REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
+        REQUIRE_FALSE(mock.called_16);
+        REQUIRE_FALSE(mock.called_8);
+        REQUIRE_FALSE(mock.called_4);
+        mock.reset();
+
+        // 1.e.+.a.2
+        //     ^
+        clock.pulse();
+        REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
         REQUIRE(mock.called_16);
         REQUIRE(mock.called_8);
         REQUIRE_FALSE(mock.called_4);
         mock.reset();
 
-        // 1.+.2
-        //   ^
-        clock.tick();
-        clock.tick();
+        // 1.e.+.a.2
+        //      ^
+        clock.pulse();
         REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
+        REQUIRE_FALSE(mock.called_16);
+        REQUIRE_FALSE(mock.called_8);
+        REQUIRE_FALSE(mock.called_4);
+        mock.reset();
+
+        // 1.e.+.a.2
+        //       ^
+        clock.pulse();
+        REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
         REQUIRE(mock.called_16);
         REQUIRE_FALSE(mock.called_8);
         REQUIRE_FALSE(mock.called_4);
         mock.reset();
 
-        // 1.+.2
-        //     ^
-        clock.tick();
-        clock.tick();
+        // 1.e.+.a.2
+        //        ^
+        clock.pulse();
         REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
+        REQUIRE_FALSE(mock.called_16);
+        REQUIRE_FALSE(mock.called_8);
+        REQUIRE_FALSE(mock.called_4);
+        mock.reset();
+
+        // 1.e.+.a.2
+        //         ^
+        clock.pulse();
+        REQUIRE(mock.called_pulse);
+        REQUIRE(mock.called_32);
         REQUIRE(mock.called_16);
         REQUIRE(mock.called_8);
         REQUIRE(mock.called_4);
@@ -217,32 +299,4 @@ TEST_CASE("calls all callbacks", "[Clock]") {
 }
 
 
-TEST_CASE("Clock callback", "[Clock]") {
-    auto sr = 8;
-    auto ppq = 4;
-    auto clock = Clock(sr, ppq);
-    clock.set_bpm(60);
 
-    auto mock = Mock();
-    auto cb = [&]() mutable {mock.call();};
-    clock.set_pulse_callback(cb);
-
-    clock.start();
-    REQUIRE(clock.ticks_per_pulse == 2);
-    REQUIRE(mock.called == false);
-
-
-    SECTION("call function") {
-        clock.tick();
-        REQUIRE(clock.ticks == 1);
-        REQUIRE(mock.called == true);
-    }
-
-    SECTION("call on clock start") {
-        clock.stop();
-        REQUIRE(mock.called == false);
-        clock.start();
-        clock.tick();
-        REQUIRE(mock.called == true);
-    }
-}
