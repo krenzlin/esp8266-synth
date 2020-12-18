@@ -298,5 +298,14 @@ TEST_CASE("calls all callbacks", "[Clock]") {
     }
 }
 
-
+TEST_CASE("test toogle", "[clock]") {
+    auto clock = Clock();
+    REQUIRE_FALSE(clock.running);
+    clock.toogle();
+    REQUIRE(clock.running);
+    clock.toogle();
+    REQUIRE_FALSE(clock.running);
+    clock.toogle();
+    REQUIRE(clock.running);
+}
 
