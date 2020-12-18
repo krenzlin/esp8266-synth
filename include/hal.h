@@ -17,12 +17,12 @@ namespace hal {
 
     class Button {
         public:
-            uint8_t pin;
-            uint8_t history {0};
+            uint8_t pin_;
+            uint8_t history_ {0};
 
             void update();
 
-            Button();
+            Button(uint8_t pin);
             bool is_pressed();
     };
 }
