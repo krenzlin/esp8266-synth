@@ -31,7 +31,7 @@ void setup() {
 void loop() {
     // updates at audio rate -> sr
     clk.tick();
-    uint16_t sample = drums.sample() >> 1;
+    uint16_t sample = drums.sample();
     hal::i2s::write(sample, sample);
 
     // update at control rate sr/100
