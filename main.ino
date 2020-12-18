@@ -27,27 +27,36 @@ void setup() {
     clk.start(bpm);
 }
 
-
-void loop() {
-    // updates at audio rate -> sr
-    clk.tick();
+void audio_loop() {
+    // updates at audio rate
     uint16_t sample = drums.sample();
     hal::i2s::write(sample, sample);
+}
 
+
+void control_loop() {
     // update at control rate sr/100
-    static uint8_t cr_counter {0};
-    if (cr_counter > 100) {
-        if (next.is_pressed()) {
-            drummer.next_pattern();
-        }
-        if (start.is_pressed()) {
-            clk.toogle();
-        }
-
-        bpm = map(analogRead(A0), 10, 1024, 40, 220);
-        clk.set_bpm(bpm);
-
-       cr_counter = 0;
+    if (next.is_pressed()) {
+        drummer.next_pattern();
     }
+    if (start.is_pressed()) {
+        clk.toogle();
+    }
+
+    bpm = map(analogRead(A0), 10, 1024, 40, 220);
+    clk.set_bpm(bpm);
+}
+
+
+void loop() {
+    clk.tick();
+    audio_loop();
+
+    static uint8_t cr_counter {0};
     cr_counter++;
+
+    if (cr_counter > 100) {
+        control_loop();
+        cr_counter = 0;
+    }
 }
