@@ -34,6 +34,16 @@ void Pattern::step() {
 }
 
 void Pattern::next_pattern() {
+    pattern_ += 1;
+    if (pattern_ > 30) {
+        pattern_ = 0;
+    }
+
+    this->init();
+}
+
+
+void Pattern::randomize_pattern() {
     for (uint32_t i=0; i<steps_; i++) {
         this->bd_[i] = rand_trigger(pattern_, BD, i);
     }

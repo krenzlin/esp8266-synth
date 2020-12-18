@@ -15,4 +15,6 @@ class Pattern {
         void init();
         void step();
         void next_pattern();
+        void randomize_pattern();
+
 };
