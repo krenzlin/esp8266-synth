@@ -7,6 +7,7 @@
 #include "pattern.h"
 #include "drummer.h"
 #include "Arduino.h"
+#include "808.h"
 
 auto drums = Drums();
 auto drummer = Pattern(&drums, 25);
@@ -21,6 +22,13 @@ void setup() {
     hal::wifi::turn_off();
     hal::i2s::init(44100);
 
+    if (next.is_held()) {
+        osc::Sampler bd {osc::Sampler(samples::Kick13_mugent, samples::Kick13_mugent_len, 1.0)};
+        osc::Sampler sn {osc::Sampler(samples::Snare7_mugent, samples::Snare7_mugent_len, 0.8)};
+        osc::Sampler hh {osc::Sampler(samples::CH5_mugent, samples::CH5_mugent_len, 0.3)};
+        drums.set_sampler(bd, sn, hh);
+        next.history_ = 0b11111111; // set pressed state
+    }
 
     auto cb = [&]() mutable {drummer.step();};
     clk.set_thirtysecond_callback(cb);

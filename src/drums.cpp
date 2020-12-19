@@ -14,3 +14,9 @@ void Drums::on(const uint32_t note, const uint32_t velocity) {
 int16_t Drums::sample() {
     return (bd.sample() + sn.sample() + hh.sample()) / 3;
 }
+
+void Drums::set_sampler(osc::Sampler bd, osc::Sampler sn, osc::Sampler hh) {
+    this->bd = bd;
+    this->sn = sn;
+    this->hh = hh;
+}

@@ -15,4 +15,5 @@ class Drums {
     public:
         void on(const uint32_t note, const uint32_t velocity=127);
         int16_t sample();
+        void set_sampler(osc::Sampler bd, osc::Sampler sn, osc::Sampler hh);
 };
