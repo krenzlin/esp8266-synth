@@ -12,8 +12,8 @@ auto drums = Drums();
 auto drummer = Pattern(&drums, 25);
 auto clk = Clock(cfg::sr, cfg::ppq);
 uint16_t bpm {100};
-auto next = hal::Button(D6);
-auto start = hal::Button(D5);
+auto next = hal::Button(D5);
+auto start = hal::Button(D6);
 
 
 void setup() {
