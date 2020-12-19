@@ -22,6 +22,10 @@ void Pattern::init() {
     }
 }
 
+void Pattern::reset() {
+    step_ = 0;
+}
+
 void Pattern::step() {
     if (bd_[step_]) drums_->on(BD_NOTE, bd_[step_] >> 1);
     if (sn_[step_]) drums_->on(SN_NOTE, sn_[step_] >> 1);

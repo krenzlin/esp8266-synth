@@ -40,6 +40,7 @@ void control_loop() {
         drummer.next_pattern();
     }
     if (start.is_pressed()) {
+        drummer.reset();
         clk.toogle();
     }
 

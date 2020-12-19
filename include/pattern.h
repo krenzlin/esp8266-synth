@@ -14,6 +14,7 @@ class Pattern {
         Pattern(Drums *drums, uint32_t pattern=26) : drums_{drums}, pattern_{pattern} {init();};
         void init();
         void step();
+        void reset();
         void next_pattern();
         void randomize_pattern();
 
