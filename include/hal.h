@@ -24,5 +24,6 @@ namespace hal {
 
             Button(uint8_t pin);
             bool is_pressed();
+            bool is_held();
     };
 }

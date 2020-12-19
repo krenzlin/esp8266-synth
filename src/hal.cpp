@@ -49,3 +49,8 @@ bool hal::Button::is_pressed() {
     }
     return false;
 }
+
+bool hal::Button::is_held() {
+    update();
+    return digitalRead(pin_) == 0;
+}
