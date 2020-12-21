@@ -37,7 +37,7 @@ bin/test: $(TEST_OBJS)
 test: bin/test
 	bin/test
 
-WRITE_SRC_FILES := write_to_file.cpp src/clock.cpp src/drums.cpp src/pattern.cpp src/osc.cpp src/misc.cpp
+WRITE_SRC_FILES := tests/write_to_file.cpp src/clock.cpp src/drums.cpp src/pattern.cpp src/osc.cpp src/misc.cpp
 WRITE_OBJS := $(addprefix build/, $(WRITE_SRC_FILES:.cpp=.o))
 bin/write: $(WRITE_OBJS)
 	g++ $(CPP_FLAGS) $(INCLUDES) -o $@ $^
