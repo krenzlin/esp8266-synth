@@ -27,10 +27,7 @@ int main() {
     auto writer = WavWriter(1, cfg::sr, 10); // channels, sr, duration in s
     writer.Open("generated.wav");
 
-    int ms = 10000;
-    int n_samples = int(cfg::sr * ms/1000.0);
-
-    for (auto i=0; i<n_samples; i++) {
+    while (!writer.done()) {
         clk.tick();
         int16_t sample = drums.sample();
         float f_sample = sample / (float) 0x7FFF;
