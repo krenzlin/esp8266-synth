@@ -43,7 +43,8 @@ bin/write: $(WRITE_OBJS)
 	g++ $(CPP_FLAGS) $(INCLUDES) -o $@ $^
 
 write: bin/write
-	bin/write
+	@mkdir -p outputs
+	bin/write outputs/generated.wav
 
 build/%.o : %.cpp
 	@mkdir -p $(dir $@)

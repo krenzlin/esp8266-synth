@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdio.h>
+#include <string>
 
 #include "clock.h"
 #include "cfg.h"
@@ -12,7 +13,12 @@
 #include "wav_writer.h"
 using stmlib::WavWriter;
 
-int main() {
+int main(int argc, char** argv) {
+    if (argc <= 1) {
+        printf("error: you need to provide a output file name");
+        return -1;
+    }
+
     auto drums = Drums();
     auto drummer = Pattern(&drums);
     auto clk = Clock(cfg::sr, cfg::ppq);
@@ -25,7 +31,7 @@ int main() {
     clk.start(bpm);
 
     auto writer = WavWriter(1, cfg::sr, 10); // channels, sr, duration in s
-    writer.Open("generated.wav");
+    writer.Open(argv[1]);
 
     while (!writer.done()) {
         clk.tick();
